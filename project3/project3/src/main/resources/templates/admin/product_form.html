@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi" data-bs-theme="dark" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Form Sản Phẩm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #cbd5e1; height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .form-card {
+            background: #1e293b; border-radius: 16px; padding: 40px; width: 100%; max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid #334155;
+        }
+        .form-control, .form-select {
+            background: #0f172a; border: 1px solid #334155; color: white; padding: 12px;
+        }
+        .form-control:focus, .form-select:focus {
+            background: #0f172a; color: white; border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        .btn-submit {
+            background: linear-gradient(90deg, #6366f1, #4338ca); border: none; padding: 12px;
+            width: 100%; color: white; font-weight: 600; border-radius: 8px; margin-top: 20px;
+        }
+        /* Style cho input file */
+        input[type="file"]::file-selector-button {
+            background-color: #334155; color: white; border: none; padding: 8px 15px; margin-right: 10px; border-radius: 5px; cursor: pointer; transition: 0.3s;
+        }
+        input[type="file"]::file-selector-button:hover { background-color: #6366f1; }
+    </style>
+</head>
+<body>
+
+<div class="form-card">
+    <h3 class="text-center text-white fw-bold mb-4" th:text="${product.id == null} ? 'Thêm Mới Sản Phẩm' : 'Cập Nhật Sản Phẩm'"></h3>
+
+    <form action="/admin/save" th:object="${product}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="mb-3">
+            <label class="form-label text-secondary small text-uppercase fw-bold">Tên Sản Phẩm</label>
+            <input type="text" th:field="*{name}" class="form-control" required placeholder="Nhập tên sản phẩm...">
+        </div>
+
+        <div class="row mb-3">
+            <div class="col">
+                <label class="form-label text-secondary small text-uppercase fw-bold">Giá Bán (VNĐ)</label>
+                <input type="number" th:field="*{price}" class="form-control" required>
+            </div>
+            <div class="col">
+                <label class="form-label text-secondary small text-uppercase fw-bold">Danh Mục</label>
+                <select th:field="*{category}" class="form-select">
+                    <option value="Laptop">Laptop</option>
+                    <option value="Điện thoại">Điện thoại</option>
+                    <option value="Phụ kiện">Phụ kiện</option>
+                    <option value="PC Gaming">PC Gaming</option>
+                    <option value="Console">Console</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label text-secondary small text-uppercase fw-bold">Hình Ảnh Sản Phẩm</label>
+            <input type="file" name="imageFile" class="form-control" accept="image/*">
+
+            <input type="hidden" th:field="*{image}">
+
+            <div th:if="${product.image != null}" class="mt-2">
+                <small class="text-secondary">Ảnh hiện tại:</small><br>
+                <img th:src="${product.image}" height="50" class="rounded border border-secondary mt-1">
+            </div>
+        </div>
+
+        <button class="btn-submit">LƯU DỮ LIỆU</button>
+        <div class="text-center mt-3">
+            <a href="/admin" class="text-secondary text-decoration-none small hover-white">Quay lại danh sách</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi" data-bs-theme="dark" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>TechStore Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; position: relative; }
+
+        /* QUẢNG CÁO TOP BAR */
+        .top-ad-bar {
+            background: linear-gradient(90deg, #6366f1, #d946ef, #f43f5e); color: white; text-align: center;
+            padding: 8px 0; font-size: 0.9rem; position: relative; z-index: 1050;
+            display: flex; justify-content: center; align-items: center; gap: 15px;
+            box-shadow: 0 2px 10px rgba(217, 70, 239, 0.3);
+        }
+        .top-ad-link { color: #facc15; font-weight: 700; text-decoration: underline; cursor: pointer; }
+        .btn-close-top {
+            position: absolute; right: 20px; background: rgba(0,0,0,0.2); border: none; color: white;
+            border-radius: 50%; width: 24px; height: 24px; font-size: 14px;
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        }
+        .btn-close-top:hover { background: rgba(0,0,0,0.5); transform: rotate(90deg); }
+
+/* HERO BANNER ẢNH TỰ CHỌN (BẢN SỬA LỖI) */
+.hero-banner {
+    /* 1. Màu nền dự phòng (Hiện ra nếu ảnh lỗi) */
+    background-color: #334155;
+
+    /* 2. Đặt ảnh nền - Đảm bảo đường dẫn này đúng */
+    background-image: url('/images/banner.png');
+
+    /* 3. Căn chỉnh ảnh */
+    background-size: cover;      /* Ảnh phủ kín khung */
+    background-position: center; /* Căn giữa ảnh */
+    background-repeat: no-repeat;
+
+    /* 4. Kích thước & Bo góc */
+    border-radius: 20px;
+    padding: 80px 20px; /* Padding đủ lớn để thấy ảnh */
+    margin-top: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    min-height: 250px; /* Đảm bảo chiều cao tối thiểu */
+}
+
+/* Lớp phủ màu đen mờ */
+.hero-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Màu đen mờ 50% */
+    z-index: 1;
+}
+
+/* Đưa nội dung chữ lên trên lớp phủ */
+.hero-banner > * {
+    position: relative;
+    z-index: 2;
+}
+
+        /* CÁC STYLE KHÁC GIỮ NGUYÊN */
+        .navbar-glass { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); z-index: 1000; top: 0; }
+        .filter-bar { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
+        .filter-btn { background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; padding: 8px 20px; border-radius: 50px; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .filter-btn:hover, .filter-btn.active { background: #6366f1; color: white; box-shadow: 0 0 15px rgba(99, 102, 241, 0.4); border-color: #6366f1; }
+        .product-card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; overflow: hidden; height: 100%; transition: 0.3s; position: relative; display: flex; flex-direction: column; }
+        .product-card:hover { transform: translateY(-8px); border-color: #38bdf8; box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3); }
+        .badge-hot { position: absolute; top: 10px; left: 10px; background: linear-gradient(45deg, #f59e0b, #d97706); color: white; font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; font-weight: 700; z-index: 2; }
+        .img-box { background: white; height: 200px; padding: 20px; display: flex; align-items: center; justify-content: center; position: relative; }
+        .img-box img { max-height: 100%; transition: 0.4s; }
+        .product-card:hover .img-box img { transform: scale(1.1); }
+        .price-new { color: #38bdf8; font-weight: 700; font-size: 1.1rem; }
+        .price-old { color: #64748b; text-decoration: line-through; font-size: 0.9rem; }
+        .btn-view { background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); width: 100%; padding: 10px; border-radius: 10px; font-weight: 500; margin-top: auto; transition: 0.3s; text-decoration: none; text-align: center; }
+        .btn-view:hover { background: #38bdf8; color: #0f172a; border-color: #38bdf8; font-weight: 700; }
+        .btn-close-ad { position: absolute; top: 5px; right: 5px; width: 20px; height: 20px; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; }
+        .btn-close-ad:hover { background: red; }
+        .ad-left { position: fixed; top: 55%; left: 20px; transform: translateY(-50%); width: 140px; height: 400px; z-index: 900; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); display: none; }
+        @media (min-width: 1400px) { .ad-left { display: block; } }
+        .ad-left img { width: 100%; height: 100%; object-fit: cover; }
+        .ad-bottom { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1000px; height: 90px; z-index: 999; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(15px); border: 1px solid #6366f1; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; box-shadow: 0 0 20px rgba(99, 102, 241, 0.3); animation: slideUp 0.5s ease-out; }
+        @keyframes slideUp { from {bottom: -100px;} to {bottom: 20px;} }
+        .ad-content h5 { margin: 0; font-weight: 700; color: #fff; text-transform: uppercase; }
+        .ad-content span { color: #facc15; font-weight: 600; }
+        .btn-ad-action { background: linear-gradient(90deg, #facc15, #eab308); color: #000; font-weight: 700; border: none; padding: 8px 25px; border-radius: 30px; text-decoration: none; box-shadow: 0 5px 15px rgba(250, 204, 21, 0.4); transition: 0.3s; }
+        .btn-ad-action:hover { transform: scale(1.05); background: #fde047; }
+    </style>
+</head>
+<body>
+
+<div class="top-ad-bar" id="adTop">
+    <div><i class="fa-solid fa-bullhorn me-2"></i> Black Friday: Giảm giá lên đến <strong>70%</strong> toàn bộ phụ kiện! <span class="ms-2 top-ad-link">Mua Ngay <i class="fa-solid fa-arrow-right"></i></span></div>
+    <button class="btn-close-top" onclick="closeAd('adTop')"><i class="fa-solid fa-xmark"></i></button>
+</div>
+
+<div class="ad-left" id="adLeft">
+    <button class="btn-close-ad" onclick="closeAd('adLeft')">×</button>
+    <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=600&auto=format&fit=crop" alt="Ad Left">
+    <div style="position: absolute; bottom: 20px; left:0; width:100%; text-align: center;"><span class="badge bg-danger">GIẢM 50%</span></div>
+</div>
+
+<div class="ad-bottom" id="adBottom">
+    <button class="btn-close-ad" onclick="closeAd('adBottom')" style="top: -10px; right: -10px; background: red;">×</button>
+    <div class="d-flex align-items-center gap-3"><i class="fa-solid fa-gift fs-1 text-warning"></i><div class="ad-content"><h5>Đăng ký thành viên mới</h5><div>Nhận ngay Voucher <span>500.000đ</span> + Freeship trọn đời</div></div></div>
+    <a href="/register" class="btn-ad-action">NHẬN NGAY</a>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-glass sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-4 d-flex align-items-center gap-2" href="/"><i class="fa-solid fa-microchip text-info"></i> TECH<span class="text-primary">STORE</span></a>
+        <form action="/" class="d-flex mx-auto w-50 position-relative">
+            <input name="keyword" class="form-control bg-dark border-secondary text-white rounded-pill ps-4" placeholder="Tìm kiếm Laptop, iPhone..." th:value="${keyword}">
+            <button class="btn position-absolute end-0 top-0 text-secondary pe-3"><i class="fa-solid fa-search"></i></button>
+        </form>
+        <div class="d-flex gap-3 align-items-center">
+            <a th:href="@{/admin}" class="btn btn-warning fw-bold rounded-pill px-3 shadow-sm" sec:authorize="hasRole('ADMIN')"><i class="fa-solid fa-user-gear me-1"></i> TRANG QUẢN TRỊ</a>
+            <a href="/cart" class="btn btn-dark border border-secondary rounded-pill position-relative"><i class="fa-solid fa-cart-shopping text-info"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" th:if="${cartCount > 0}" th:text="${cartCount}">0</span></a>
+            <div sec:authorize="!isAuthenticated()" class="d-flex gap-2"><a th:href="@{/login}" class="btn btn-sm btn-outline-light rounded-pill px-3">Login</a><a th:href="@{/register}" class="btn btn-sm btn-primary rounded-pill px-3">Sign Up</a></div>
+            <div sec:authorize="isAuthenticated()" class="d-flex align-items-center gap-3 bg-dark border border-secondary px-3 py-1 rounded-pill">
+                <div class="d-flex align-items-center"><div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white me-2" style="width: 32px; height: 32px;"><i class="fa-solid" th:classappend="${#authorization.expression('hasRole(''ADMIN'')')} ? 'fa-user-astronaut' : 'fa-user'"></i></div><div style="line-height: 1.2;"><div style="font-size: 10px; color: #94a3b8;">Xin chào,</div><div style="font-size: 13px; font-weight: bold; color: #38bdf8;" sec:authentication="name">User</div></div></div>
+                <form th:action="@{/logout}" method="post" style="margin: 0;"><button class="btn btn-sm text-danger p-0 border-0" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket fs-5"></i></button></form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container pb-5">
+
+    <div class="hero-banner text-white mb-4">
+        <h1 class="fw-bold display-5">Siêu Sale Công Nghệ 2026</h1>
+        <p class="fs-5">Săn deal hời - Nâng tầm cuộc chơi</p>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="fw-bold text-white m-0"><i class="fa-solid fa-fire text-warning me-2"></i>Sản Phẩm</h4>
+        <div class="filter-bar">
+            <a href="/" class="filter-btn" th:classappend="${category == null} ? 'active'"><i class="fa-solid fa-layer-group"></i> Tất cả</a>
+            <a href="/?category=Apple" class="filter-btn" th:classappend="${category == 'Apple'} ? 'active'"><i class="fa-brands fa-apple"></i> Apple</a>
+            <a href="/?category=Samsung" class="filter-btn" th:classappend="${category == 'Samsung'} ? 'active'"><i class="fa-brands fa-android"></i> Samsung</a>
+            <a href="/?category=Laptop" class="filter-btn" th:classappend="${category == 'Laptop'} ? 'active'"><i class="fa-solid fa-laptop"></i> Laptop</a>
+            <a href="/?category=Phụ kiện" class="filter-btn" th:classappend="${category == 'Phụ kiện'} ? 'active'"><i class="fa-solid fa-headphones"></i> Phụ kiện</a>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-5 g-4">
+        <div class="col" th:each="p : ${products}">
+            <div class="product-card">
+                <div th:if="${p.hot}" class="badge-hot"><i class="fa-solid fa-bolt"></i> HOT</div>
+                <div class="img-box"><img th:src="${p.image}" alt="sp"></div>
+                <div class="p-3 d-flex flex-column flex-grow-1">
+                    <div class="text-secondary small text-uppercase fw-bold mb-1" th:text="${p.category}"></div>
+                    <h6 class="text-white fw-bold mb-2 text-truncate" th:text="${p.name}"></h6>
+                    <div class="mb-3">
+                        <span class="price-new me-2" th:text="${#numbers.formatDecimal(p.salePrice, 0, 'COMMA', 0, 'POINT')} + 'đ'"></span>
+                        <br><span class="price-old" th:text="${#numbers.formatDecimal(p.price, 0, 'COMMA', 0, 'POINT')} + 'đ'"></span>
+                    </div>
+                    <a th:href="@{'/product/' + ${p.id}}" class="btn-view">Xem chi tiết</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${products.isEmpty()}" class="text-center py-5">
+        <i class="fa-solid fa-box-open fs-1 text-secondary mb-3"></i>
+        <p class="text-secondary">Không tìm thấy sản phẩm nào.</p>
+        <a href="/" class="btn btn-outline-primary rounded-pill">Quay lại tất cả</a>
+    </div>
+</div>
+
+<script>
+    function closeAd(id) { document.getElementById(id).style.display = 'none'; }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
