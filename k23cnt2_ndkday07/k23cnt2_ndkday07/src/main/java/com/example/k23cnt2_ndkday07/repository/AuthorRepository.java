@@ -1,0 +1,15 @@
+package com.example.k23cnt2_ndkday07.repository;
+
+import com.example.k23cnt2_ndkday07.entity.Author;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface AuthorRepository extends JpaRepository<Author, Long> {
+
+    // Tìm tác giả theo code (code là unique)
+    Author findByCode(String code);
+
+    // Kiểm tra code đã tồn tại chưa
+    boolean existsByCode(String code);
+}

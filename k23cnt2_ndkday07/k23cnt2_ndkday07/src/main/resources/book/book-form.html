@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${book.id != null ? 'Sửa sách' : 'Thêm sách mới'}">Book Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <style>
+        body { background: #f0f2f5; }
+        .current-img { width: 120px; height: 160px; object-fit: cover; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<section class="container my-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3 th:text="${book.id != null ? 'CHỈNH SỬA SÁCH' : 'THÊM SÁCH MỚI'}"></h3>
+        </div>
+        <div class="card-body">
+            <!-- Form lưu đúng đường dẫn /books/save -->
+            <form th:action="@{/books/save}"
+                  th:object="${book}"
+                  method="post"
+                  enctype="multipart/form-data">
+
+                <!-- ID ẩn (khi sửa) -->
+                <input type="hidden" th:field="*{id}"/>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label fw-bold">Mã sách</label>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="*{code}" class="form-control" placeholder="VD: B001" required/>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label fw-bold">Tên sách</label>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="*{name}" class="form-control" placeholder="Nhập tên sách" required/>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label fw-bold">Ảnh sách</label>
+                    <div class="col-sm-10">
+                        <input type="file" name="imageBook" class="form-control" accept="image/*"/>
+                        <!-- Giữ lại đường dẫn ảnh cũ nếu không chọn ảnh mới -->
+                        <input type="hidden" th:field="*{imgUrl}"/>
+                        <!-- Hiển thị ảnh hiện tại (khi sửa) -->
+                        <div th:if="${book.imgUrl != null and !book.imgUrl.isEmpty()}" class="mt-2">
+                            <small>Ảnh hiện tại:</small><br>
+                            <img th:src="@{${book.imgUrl}}" class="current-img" alt="Ảnh hiện tại"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label fw-bold">Mô tả</label>
+                    <div class="col-sm-10">
+                        <textarea th:field="*{description}" rows="3" class="form-control" placeholder="Mô tả ngắn về sách"></textarea>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label fw-bold">Số lượng</label>
+                    <div class="col-sm-10">
+                        <input type="number" th:field="*{quantity}" min="0" class="form-control" required/>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label fw-bold">Giá (₫)</label>
+                    <div class="col-sm-10">
+                        <input type="number" th:field="*{price}" min="0" step="1000" class="form-control" required/>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label fw-bold">Tác giả</label>
+                    <div class="col-sm-10">
+                        <div th:each="author : ${authors}" class="form-check form-check-inline">
+                            <input type="checkbox"
+                                   name="authorIds"
+                                   class="form-check-input"
+                                   th:value="${author.id}"
+                                   th:checked="${book.authors != null and book.authors.stream().anyMatch(a -> a.id == author.id)}"/>
+                            <label class="form-check-label" th:text="${author.name}">Tác giả</label>
+                        </div>
+                        <div th:if="${authors == null or authors.isEmpty()}" class="text-danger">
+                            Chưa có tác giả nào trong hệ thống!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label fw-bold">Trạng thái</label>
+                    <div class="col-sm-10 pt-2">
+                        <div class="form-check">
+                            <input type="checkbox" th:field="*{isActive}" class="form-check-input" id="isActive"/>
+                            <label class="form-check-label" for="isActive">Hoạt động (bỏ tick = khóa)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success btn-lg px-5">
+                        <span th:text="${book.id != null ? 'CẬP NHẬT' : 'THÊM MỚI'}"></span>
+                    </button>
+                    <a th:href="@{/books}" class="btn btn-secondary btn-lg px-5 ms-3">Quay lại danh sách</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>
