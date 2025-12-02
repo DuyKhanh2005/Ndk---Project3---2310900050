@@ -1,95 +1,60 @@
 package com.example.project3.controller;
-
-import com.example.project3.entity.Order;
-import com.example.project3.repository.OrderRepository;
+import com.example.project3.entity.*;
+import com.example.project3.repository.*;
 import com.example.project3.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import java.util.*;
 
-import java.util.Date;
-
-@Controller
-@RequestMapping("/cart")
+@Controller @RequestMapping("/cart")
 public class CartController {
-
     @Autowired private CartService cartService;
-    @Autowired private OrderRepository orderRepository;
+    @Autowired private OrderRepository orderRepo;
+    @Autowired private OrderDetailRepository detailRepo;
 
-    // 1. Xem giỏ hàng
-    @GetMapping("")
-    public String viewCart(Model model) {
+    @GetMapping("") public String viewCart(Model model) {
         model.addAttribute("items", cartService.getItems());
-        model.addAttribute("total", cartService.getTotal()); // Tổng tiền này đã trừ Voucher (nếu có)
+        model.addAttribute("total", cartService.getTotal());
         return "cart";
     }
+    @GetMapping("/add/{id}") public String add(@PathVariable Long id) { cartService.addToCart(id); return "redirect:/cart"; }
+    @GetMapping("/remove/{id}") public String remove(@PathVariable Long id) { cartService.remove(id); return "redirect:/cart"; }
+    @PostMapping("/apply-voucher") public String apply(@RequestParam String code) { cartService.applyVoucher(code); return "redirect:/cart"; }
+    @GetMapping("/remove-voucher") public String removeVoucher() { cartService.removeVoucher(); return "redirect:/cart"; }
 
-    // 2. Thêm vào giỏ
-    @GetMapping("/add/{id}")
-    public String addToCart(@PathVariable Long id) {
-        cartService.addToCart(id);
-        return "redirect:/cart";
-    }
-
-    // 3. Xóa khỏi giỏ
-    @GetMapping("/remove/{id}")
-    public String remove(@PathVariable Long id) {
-        cartService.remove(id);
-        return "redirect:/cart";
-    }
-
-    // --- LOGIC VOUCHER (MỚI THÊM) ---
-
-    // 4. Áp dụng Voucher
-    @PostMapping("/apply-voucher")
-    public String applyVoucher(@RequestParam("code") String code) {
-        // Gọi hàm xử lý trong Service
-        cartService.applyVoucher(code);
-        return "redirect:/cart";
-    }
-
-    // 5. Hủy Voucher
-    @GetMapping("/remove-voucher")
-    public String removeVoucher() {
-        cartService.removeVoucher();
-        return "redirect:/cart";
-    }
-
-    // --------------------------------
-
-    // 6. Xem form thanh toán
-    @GetMapping("/checkout")
-    public String checkout(Model model) {
-        // Logic bảo vệ: Giỏ hàng trống thì không cho thanh toán
-        if (cartService.getItems().isEmpty()) {
-            return "redirect:/cart?empty";
-        }
-
+    @GetMapping("/checkout") public String checkout(Model model) {
+        if (cartService.getItems().isEmpty()) return "redirect:/cart?empty";
         model.addAttribute("order", new Order());
-        model.addAttribute("total", cartService.getTotal()); // Tổng tiền đã trừ voucher
+        model.addAttribute("total", cartService.getTotal());
         return "checkout";
     }
 
-    // 7. Xử lý khi bấm nút "Xác Nhận Đặt Hàng"
-    @PostMapping("/checkout")
-    public String confirmCheckout(@ModelAttribute Order order) {
-        if (cartService.getItems().isEmpty()) {
-            return "redirect:/cart?empty";
-        }
-
+    @PostMapping("/checkout") public String confirm(@ModelAttribute Order order) {
+        if (cartService.getItems().isEmpty()) return "redirect:/cart?empty";
         order.setCreateAt(new Date());
-        order.setTotalPrice(cartService.getTotal()); // Lưu tổng tiền thực tế phải trả
+        order.setTotalPrice(cartService.getTotal());
+        order.setStatus("COD".equals(order.getPaymentMethod()) ? "Mới đặt" : "Đã thanh toán " + order.getPaymentMethod());
+        Order saved = orderRepo.save(order);
 
-        if ("COD".equals(order.getPaymentMethod())) {
-            order.setStatus("Mới đặt - Chờ thanh toán");
-        } else {
-            order.setStatus("Đã thanh toán qua " + order.getPaymentMethod());
+        for (Map<String, Object> item : cartService.getItems()) {
+            OrderDetail d = new OrderDetail();
+            d.setOrder(saved);
+            d.setProduct((Product) item.get("product"));
+            d.setQuantity((Integer) item.get("quantity"));
+            d.setPrice(((Product) item.get("product")).getPrice());
+            detailRepo.save(d);
         }
+        cartService.clear();
+        return "redirect:/cart/order/" + saved.getId();
+    }
 
-        orderRepository.save(order);
-        cartService.clear(); // Xóa giỏ hàng (Voucher cũng tự mất theo)
-
-        return "redirect:/?success";
+    @GetMapping("/order/{id}") public String success(@PathVariable Long id, Model model) {
+        Order o = orderRepo.findById(id).orElse(null);
+        if (o == null) return "redirect:/";
+        model.addAttribute("order", o);
+        model.addAttribute("details", o.getOrderDetails());
+        return "order_details";
     }
 }

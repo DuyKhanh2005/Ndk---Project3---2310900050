@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi" data-bs-theme="dark" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi Tiết Đơn Hàng #[[${order.id}]]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; color: #e2e8f0; padding: 40px 0; }
+        .details-card {
+            background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .table { --bs-table-bg: transparent; --bs-table-color: #cbd5e1; }
+        .table thead th { border-bottom: 2px solid #334155; }
+        .table tbody td { border-top: 1px solid #334155; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="details-card">
+        <h2 class="fw-bold text-info mb-4"><i class="fa-solid fa-check-circle me-2"></i> Đơn Hàng Đã Đặt Thành Công!</h2>
+        <p class="text-secondary">Cảm ơn bạn, đơn hàng **#[[${order.id}]]** đang chờ xử lý.</p>
+
+        <hr class="border-secondary">
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <h5 class="text-white mb-3">Thông Tin Khách Hàng</h5>
+                <p class="mb-1"><strong>Tên:</strong> <span th:text="${order.customerName}"></span></p>
+                <p class="mb-1"><strong>SĐT:</strong> <span th:text="${order.customerPhone}"></span></p>
+                <p class="mb-1"><strong>Địa chỉ:</strong> <span th:text="${order.customerAddress}"></span></p>
+                <p class="mb-1"><strong>Thời gian:</strong> <span th:text="${#dates.format(order.createAt, 'dd/MM/yyyy HH:mm')}"></span></p>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <h5 class="text-white mb-3">Thanh Toán & Trạng Thái</h5>
+                <p class="mb-1"><strong>Trạng thái:</strong> <span class="badge bg-warning text-dark" th:text="${order.status}"></span></p>
+                <p class="mb-1"><strong>Phương thức:</strong> <span th:text="${order.paymentMethod}"></span></p>
+                <p class="mb-1"><strong>Tổng tiền:</strong> <span class="fw-bold text-info" th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')} + ' đ'"></span></p>
+            </div>
+        </div>
+
+        <hr class="border-secondary">
+
+        <h5 class="text-white mb-3">Chi Tiết Sản Phẩm Đã Mua</h5>
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                <tr class="text-secondary small text-uppercase">
+                    <th>Sản phẩm</th><th>Giá mua</th><th>SL</th><th>Thành tiền</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="detail : ${details}">
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img th:src="${detail.product.image}" width="50" height="50" class="rounded me-3 bg-white p-1">
+                            <div th:text="${detail.product.name}" class="fw-bold"></div>
+                        </div>
+                    </td>
+                    <td th:text="${#numbers.formatDecimal(detail.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"></td>
+                    <td th:text="${detail.quantity}"></td>
+                    <td class="fw-bold text-info" th:text="${#numbers.formatDecimal(detail.price * detail.quantity, 0, 'COMMA', 0, 'POINT')} + ' đ'"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-primary rounded-pill px-4"><i class="fa-solid fa-home me-2"></i> Tiếp tục mua sắm</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
