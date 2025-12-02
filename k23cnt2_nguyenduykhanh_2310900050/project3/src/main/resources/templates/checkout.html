@@ -8,36 +8,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; color: #e2e8f0; padding: 40px 0; }
-        .checkout-card {
-            background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+        .checkout-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         .form-control { background: rgba(15, 23, 42, 0.5); border: 1px solid #334155; color: white; padding: 12px; }
         .form-control:focus { background: rgba(15, 23, 42, 0.8); border-color: #6366f1; color: white; box-shadow: none; }
-
-        .payment-option {
-            border: 1px solid #334155; border-radius: 12px; padding: 15px; margin-bottom: 10px;
-            cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: space-between;
-            background: rgba(15, 23, 42, 0.5);
-        }
+        .payment-option { border: 1px solid #334155; border-radius: 12px; padding: 15px; margin-bottom: 10px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: space-between; background: rgba(15, 23, 42, 0.5); }
         .payment-option:hover, .payment-option.active { border-color: #38bdf8; background: rgba(56, 189, 248, 0.1); }
         .payment-radio { accent-color: #38bdf8; transform: scale(1.2); }
-
-        .btn-confirm {
-            background: linear-gradient(90deg, #6366f1, #8b5cf6); border: none; width: 100%; padding: 14px;
-            color: white; font-weight: 600; border-radius: 10px; margin-top: 20px; transition: 0.3s;
-        }
+        .btn-confirm { background: linear-gradient(90deg, #6366f1, #8b5cf6); border: none; width: 100%; padding: 14px; color: white; font-weight: 600; border-radius: 10px; margin-top: 20px; transition: 0.3s; }
         .btn-confirm:hover { opacity: 0.9; box-shadow: 0 0 15px rgba(99, 102, 241, 0.5); }
-
-        /* Style cho khung chứa QR */
-        #qr-container {
-            display: none; /* Mặc định ẩn */
-            text-align: center; margin-top: 15px; padding: 15px;
-            background: white; border-radius: 12px; color: black;
-            animation: fadeIn 0.5s ease;
-        }
-        #qr-image { width: 100%; max-width: 250px; border-radius: 8px; border: 1px solid #ddd; }
+        #qr-container { display: none; text-align: center; margin-top: 15px; padding: 15px; background: white; border-radius: 12px; color: black; animation: fadeIn 0.5s ease; }
+        #qr-image { width: 100%; max-width: 200px; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -54,18 +34,43 @@
                     <div class="row">
                         <div class="col-md-6 mb-4">
                             <h5 class="text-info mb-3"><i class="fa-solid fa-truck-fast me-2"></i>Thông tin nhận hàng</h5>
-                            <div class="mb-3"><label class="small text-secondary fw-bold">Họ và tên</label><input type="text" th:field="${order.customerName}" class="form-control" required></div>
-                            <div class="mb-3"><label class="small text-secondary fw-bold">Số điện thoại</label><input type="text" th:field="${order.customerPhone}" class="form-control" required></div>
-                            <div class="mb-3"><label class="small text-secondary fw-bold">Địa chỉ chi tiết</label><textarea th:field="${order.customerAddress}" class="form-control" rows="3" required></textarea></div>
+                            <div class="mb-3">
+                                <label class="small text-secondary fw-bold">Họ và tên</label>
+                                <input type="text" th:field="${order.customerName}" class="form-control" required placeholder="Nhập họ tên đầy đủ...">
+                            </div>
+                            <div class="mb-3">
+                                <label class="small text-secondary fw-bold">Số điện thoại</label>
+                                <input type="text" th:field="${order.customerPhone}" class="form-control" required placeholder="Nhập số điện thoại...">
+                            </div>
+                            <div class="mb-3">
+                                <label class="small text-secondary fw-bold">Địa chỉ chi tiết</label>
+                                <textarea th:field="${order.customerAddress}" class="form-control" rows="3" required placeholder="Số nhà, tên đường, xã/phường..."></textarea>
+                            </div>
                         </div>
 
                         <div class="col-md-6">
                             <h5 class="text-info mb-3"><i class="fa-regular fa-credit-card me-2"></i>Phương thức thanh toán</h5>
 
+                            <label class="payment-option" onclick="selectPayment(this, 'OTHER')">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-brands fa-apple fs-2 me-3 text-white"></i>
+                                    <div><div class="fw-bold">Apple Pay</div><div class="small text-secondary">Thanh toán một chạm</div></div>
+                                </div>
+                                <input type="radio" name="paymentMethod" value="ApplePay" class="payment-radio">
+                            </label>
+
+                            <label class="payment-option" onclick="selectPayment(this, 'OTHER')">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-solid fa-wallet fs-2 me-3 text-primary"></i>
+                                    <div><div class="fw-bold">ZaloPay / MoMo</div><div class="small text-secondary">Ví điện tử</div></div>
+                                </div>
+                                <input type="radio" name="paymentMethod" value="ZaloPay" class="payment-radio">
+                            </label>
+
                             <label class="payment-option" onclick="selectPayment(this, 'QR')">
                                 <div class="d-flex align-items-center">
                                     <i class="fa-solid fa-qrcode fs-2 me-3 text-warning"></i>
-                                    <div><div class="fw-bold">Chuyển khoản (VietQR)</div><div class="small text-secondary">Quét mã để thanh toán ngay</div></div>
+                                    <div><div class="fw-bold">Chuyển khoản (VietQR)</div><div class="small text-secondary">Quét mã QR tự động</div></div>
                                 </div>
                                 <input type="radio" name="paymentMethod" value="BankTransfer" class="payment-radio">
                             </label>
@@ -73,13 +78,13 @@
                             <div id="qr-container">
                                 <p class="fw-bold mb-2 text-dark">Quét mã để thanh toán:</p>
                                 <img id="qr-image" src="" alt="QR Code">
-                                <p class="small text-muted mt-2 mb-0">Nội dung chuyển khoản sẽ tự động điền</p>
+                                <p class="small text-muted mt-2 mb-0">Nội dung và số tiền đã được điền sẵn</p>
                             </div>
 
                             <label class="payment-option active" onclick="selectPayment(this, 'COD')">
                                 <div class="d-flex align-items-center">
                                     <i class="fa-solid fa-money-bill-wave fs-2 me-3 text-success"></i>
-                                    <div><div class="fw-bold">Thanh toán khi nhận hàng</div><div class="small text-secondary">COD (Cash on Delivery)</div></div>
+                                    <div><div class="fw-bold">Thanh toán khi nhận hàng</div><div class="small text-secondary">COD (Tiền mặt)</div></div>
                                 </div>
                                 <input type="radio" name="paymentMethod" value="COD" class="payment-radio" checked>
                             </label>
@@ -100,29 +105,23 @@
 </div>
 
 <script>
-    // === CẤU HÌNH TÀI KHOẢN CỦA BẠN TẠI ĐÂY ===
-    const MY_BANK_ID = 'MB';       // Mã ngân hàng (VD: MB, VCB, ACB, TPB, BIDV...)
-    const MY_ACCOUNT_NO = '0345865380'; // Số tài khoản của bạn
-    const ACCOUNT_NAME = 'NGUYEN DUY KHANH'; // Tên chủ tài khoản (Tùy chọn hiển thị)
-    // ==========================================
+    // CẤU HÌNH TÀI KHOẢN CỦA BẠN (Đã cập nhật theo yêu cầu)
+    const MY_BANK_ID = 'MB';
+    const MY_ACCOUNT_NO = '0345865380';
+    const ACCOUNT_NAME = 'NGUYEN DUY KHANH';
 
     function selectPayment(element, type) {
-        // Xử lý giao diện nút chọn
         document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('active'));
         element.classList.add('active');
         element.querySelector('input[type="radio"]').checked = true;
 
-        // Xử lý hiển thị QR
         const qrContainer = document.getElementById('qr-container');
         const qrImage = document.getElementById('qr-image');
-        const totalAmount = document.getElementById('totalAmount').value; // Lấy tổng tiền (Số thực)
+        const totalAmount = document.getElementById('totalAmount').value;
 
         if (type === 'QR') {
-            // Tạo link VietQR API
-            // Format: https://img.vietqr.io/image/<BANK_ID>-<ACCOUNT_NO>-<TEMPLATE>.png?amount=<AMOUNT>&addInfo=<CONTENT>&accountName=<NAME>
             const content = "Thanh toan don hang TechStore";
             const qrUrl = `https://img.vietqr.io/image/${MY_BANK_ID}-${MY_ACCOUNT_NO}-compact2.png?amount=${totalAmount}&addInfo=${encodeURIComponent(content)}&accountName=${encodeURIComponent(ACCOUNT_NAME)}`;
-
             qrImage.src = qrUrl;
             qrContainer.style.display = 'block';
         } else {

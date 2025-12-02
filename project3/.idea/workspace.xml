@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c46618ce-c42d-4464-bc29-8f3b61a099ae" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/controller/CartController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/controller/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/project3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/.idea/project3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/Project3Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/Project3Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/config/DataSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/config/DataSeeder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/controller/CartController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/controller/HomeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/controller/RegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/controller/RegistrationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/entity/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/entity/OrderDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/entity/OrderDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/entity/Voucher.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/entity/Voucher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/repository/OrderDetailRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/repository/OrderDetailRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/repository/VoucherRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/repository/VoucherRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/service/CartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/java/com/example/project3/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/java/com/example/project3/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/static/images/asusROG.png" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/static/images/asusROG.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/static/images/banner.png" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/static/images/banner.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/static/images/ipad.png" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/static/images/ipad.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/static/images/iphone15.png" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/static/images/iphone15.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/static/images/macbook.png" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/static/images/macbook.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/static/images/samsungS25ultra.png" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/static/images/samsungS25ultra.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/static/images/tainghe.png" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/static/images/tainghe.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/templates/admin/customer_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/admin/customer_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/templates/admin/product_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/admin/product_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/templates/admin/product_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/admin/product_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/templates/admin/stats.html" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/admin/stats.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/templates/admin/voucher_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/admin/voucher_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/templates/cart.html" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/cart.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/templates/checkout.html" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/checkout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/templates/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/templates/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/templates/order_details.html" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/order_details.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/main/resources/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project3/src/test/java/com/example/project3/Project3ApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../k23cnt2_nguyenduykhanh_2310900050/project3/src/test/java/com/example/project3/Project3ApplicationTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JavaAutoRunManager">
+    <enabled-run-configurations>
+      <run-configuration type="JUnit" name="All in project3" />
+    </enabled-run-configurations>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="36FTqyioxPMJqQJoiYleUFc0eBr" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Project3Application.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JUnit.All in project3.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/education/Project3-ChungTrinh/BaiTap/project3&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\education\Project3-ChungTrinh\BaiTap\project3\project3\src\main\resources\templates" />
+      <recent name="D:\education\Project3-ChungTrinh\BaiTap\project3\project3\src\main\resources\templates\fragments" />
+      <recent name="D:\education\Project3-ChungTrinh\BaiTap\project3\project3\src\main\resources\templates\admin" />
+      <recent name="D:\education\Project3-ChungTrinh\BaiTap\project3\project3\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="All in project3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="project3" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.All in project3" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c46618ce-c42d-4464-bc29-8f3b61a099ae" name="Changes" comment="" />
+      <created>1764601514870</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1764601514870</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/project3$All_in_project3.ic" NAME="All in project3 Coverage Results" MODIFIED="1764603077034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+  </component>
+</project>

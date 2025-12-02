@@ -25,46 +25,18 @@
         }
         .btn-close-top:hover { background: rgba(0,0,0,0.5); transform: rotate(90deg); }
 
-/* HERO BANNER ẢNH TỰ CHỌN (BẢN SỬA LỖI) */
-.hero-banner {
-    /* 1. Màu nền dự phòng (Hiện ra nếu ảnh lỗi) */
-    background-color: #334155;
+        /* HERO BANNER */
+        .hero-banner {
+            background-color: #334155;
+            background-image: url('/images/banner.png'); /* Đảm bảo file ảnh tồn tại */
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+            border-radius: 20px; padding: 80px 20px; margin-top: 20px; text-align: center;
+            position: relative; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); min-height: 250px;
+        }
+        .hero-banner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); z-index: 1; }
+        .hero-banner > * { position: relative; z-index: 2; }
 
-    /* 2. Đặt ảnh nền - Đảm bảo đường dẫn này đúng */
-    background-image: url('/images/banner.png');
-
-    /* 3. Căn chỉnh ảnh */
-    background-size: cover;      /* Ảnh phủ kín khung */
-    background-position: center; /* Căn giữa ảnh */
-    background-repeat: no-repeat;
-
-    /* 4. Kích thước & Bo góc */
-    border-radius: 20px;
-    padding: 80px 20px; /* Padding đủ lớn để thấy ảnh */
-    margin-top: 20px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    min-height: 250px; /* Đảm bảo chiều cao tối thiểu */
-}
-
-/* Lớp phủ màu đen mờ */
-.hero-banner::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Màu đen mờ 50% */
-    z-index: 1;
-}
-
-/* Đưa nội dung chữ lên trên lớp phủ */
-.hero-banner > * {
-    position: relative;
-    z-index: 2;
-}
-
-        /* CÁC STYLE KHÁC GIỮ NGUYÊN */
+        /* NAVBAR & COMPONENTS */
         .navbar-glass { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); z-index: 1000; top: 0; }
         .filter-bar { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; scrollbar-width: none; }
         .filter-btn { background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255,255,255,0.1); color: #94a3b8; padding: 8px 20px; border-radius: 50px; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
@@ -79,6 +51,8 @@
         .price-old { color: #64748b; text-decoration: line-through; font-size: 0.9rem; }
         .btn-view { background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); width: 100%; padding: 10px; border-radius: 10px; font-weight: 500; margin-top: auto; transition: 0.3s; text-decoration: none; text-align: center; }
         .btn-view:hover { background: #38bdf8; color: #0f172a; border-color: #38bdf8; font-weight: 700; }
+
+        /* ADVERTISING */
         .btn-close-ad { position: absolute; top: 5px; right: 5px; width: 20px; height: 20px; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; font-size: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; }
         .btn-close-ad:hover { background: red; }
         .ad-left { position: fixed; top: 55%; left: 20px; transform: translateY(-50%); width: 140px; height: 400px; z-index: 900; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); display: none; }
@@ -98,13 +72,11 @@
     <div><i class="fa-solid fa-bullhorn me-2"></i> Black Friday: Giảm giá lên đến <strong>70%</strong> toàn bộ phụ kiện! <span class="ms-2 top-ad-link">Mua Ngay <i class="fa-solid fa-arrow-right"></i></span></div>
     <button class="btn-close-top" onclick="closeAd('adTop')"><i class="fa-solid fa-xmark"></i></button>
 </div>
-
 <div class="ad-left" id="adLeft">
     <button class="btn-close-ad" onclick="closeAd('adLeft')">×</button>
     <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=600&auto=format&fit=crop" alt="Ad Left">
     <div style="position: absolute; bottom: 20px; left:0; width:100%; text-align: center;"><span class="badge bg-danger">GIẢM 50%</span></div>
 </div>
-
 <div class="ad-bottom" id="adBottom">
     <button class="btn-close-ad" onclick="closeAd('adBottom')" style="top: -10px; right: -10px; background: red;">×</button>
     <div class="d-flex align-items-center gap-3"><i class="fa-solid fa-gift fs-1 text-warning"></i><div class="ad-content"><h5>Đăng ký thành viên mới</h5><div>Nhận ngay Voucher <span>500.000đ</span> + Freeship trọn đời</div></div></div>
@@ -114,24 +86,48 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-glass sticky-top">
     <div class="container">
         <a class="navbar-brand fw-bold fs-4 d-flex align-items-center gap-2" href="/"><i class="fa-solid fa-microchip text-info"></i> TECH<span class="text-primary">STORE</span></a>
+
         <form action="/" class="d-flex mx-auto w-50 position-relative">
             <input name="keyword" class="form-control bg-dark border-secondary text-white rounded-pill ps-4" placeholder="Tìm kiếm Laptop, iPhone..." th:value="${keyword}">
             <button class="btn position-absolute end-0 top-0 text-secondary pe-3"><i class="fa-solid fa-search"></i></button>
         </form>
+
         <div class="d-flex gap-3 align-items-center">
+
             <a th:href="@{/admin}" class="btn btn-warning fw-bold rounded-pill px-3 shadow-sm" sec:authorize="hasRole('ADMIN')"><i class="fa-solid fa-user-gear me-1"></i> TRANG QUẢN TRỊ</a>
+
             <a href="/cart" class="btn btn-dark border border-secondary rounded-pill position-relative"><i class="fa-solid fa-cart-shopping text-info"></i><span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" th:if="${cartCount > 0}" th:text="${cartCount}">0</span></a>
-            <div sec:authorize="!isAuthenticated()" class="d-flex gap-2"><a th:href="@{/login}" class="btn btn-sm btn-outline-light rounded-pill px-3">Login</a><a th:href="@{/register}" class="btn btn-sm btn-primary rounded-pill px-3">Sign Up</a></div>
+
+            <div sec:authorize="!isAuthenticated()" class="d-flex gap-2">
+                <a th:href="@{/login}" class="btn btn-sm btn-outline-light rounded-pill px-3">Login</a>
+                <a th:href="@{/register}" class="btn btn-sm btn-primary rounded-pill px-3">Sign Up</a>
+            </div>
+
             <div sec:authorize="isAuthenticated()" class="d-flex align-items-center gap-3 bg-dark border border-secondary px-3 py-1 rounded-pill">
-                <div class="d-flex align-items-center"><div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white me-2" style="width: 32px; height: 32px;"><i class="fa-solid" th:classappend="${#authorization.expression('hasRole(''ADMIN'')')} ? 'fa-user-astronaut' : 'fa-user'"></i></div><div style="line-height: 1.2;"><div style="font-size: 10px; color: #94a3b8;">Xin chào,</div><div style="font-size: 13px; font-weight: bold; color: #38bdf8;" sec:authentication="name">User</div></div></div>
-                <form th:action="@{/logout}" method="post" style="margin: 0;"><button class="btn btn-sm text-danger p-0 border-0" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket fs-5"></i></button></form>
+
+                <div class="d-flex align-items-center">
+                    <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white me-2" style="width: 32px; height: 32px;">
+                        <i class="fa-solid" th:classappend="${#authorization.expression('hasRole(''ADMIN'')')} ? 'fa-user-astronaut' : 'fa-user'"></i>
+                    </div>
+                    <div style="line-height: 1.2;">
+                        <div style="font-size: 10px; color: #94a3b8;">Xin chào,</div>
+                        <div style="font-size: 13px; font-weight: bold; color: #38bdf8;" sec:authentication="name">User</div>
+                    </div>
+                </div>
+
+                <a th:href="@{/profile/orders}" class="btn btn-sm btn-outline-warning border-0" title="Xem lịch sử đơn hàng">
+                    <i class="fa-solid fa-clock-rotate-left fs-5"></i>
+                </a>
+
+                <form th:action="@{/logout}" method="post" style="margin: 0;">
+                    <button class="btn btn-sm text-danger p-0 border-0" title="Đăng xuất"><i class="fa-solid fa-right-from-bracket fs-5"></i></button>
+                </form>
             </div>
         </div>
     </div>
 </nav>
 
 <div class="container pb-5">
-
     <div class="hero-banner text-white mb-4">
         <h1 class="fw-bold display-5">Siêu Sale Công Nghệ 2026</h1>
         <p class="fs-5">Săn deal hời - Nâng tầm cuộc chơi</p>
@@ -173,10 +169,7 @@
     </div>
 </div>
 
-<script>
-    function closeAd(id) { document.getElementById(id).style.display = 'none'; }
-</script>
-
+<script> function closeAd(id) { document.getElementById(id).style.display = 'none'; } </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
