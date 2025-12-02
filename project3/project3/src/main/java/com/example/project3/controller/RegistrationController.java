@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller // <--- PHẢI CÓ
-@RequestMapping("/register") // <--- PHẢI ĐÚNG
+@Controller
+@RequestMapping("/register")
 public class RegistrationController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class RegistrationController {
     public String showRegistrationForm(Model model) {
         // Model phải có đối tượng user rỗng để form hoạt động
         model.addAttribute("user", new User());
-        return "register"; // <--- TRẢ VỀ FILE register.html
+        return "register"; // <--- TRẢ VỀ register.html
     }
 
     // Xử lý POST: Nhận dữ liệu và lưu user

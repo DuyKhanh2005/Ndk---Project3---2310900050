@@ -26,9 +26,7 @@ public class AdminController {
     @Autowired private OrderRepository orderRepo;
     @Autowired private VoucherRepository voucherRepo; // <--- MỚI THÊM
 
-    // ==========================================================
     // 1. QUẢN LÝ SẢN PHẨM
-    // ==========================================================
     @GetMapping("")
     public String index(Model model, @RequestParam(required = false) String keyword) {
         if (keyword != null) model.addAttribute("products", productRepo.findByNameContainingIgnoreCase(keyword));
@@ -70,20 +68,14 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    // ==========================================================
     // 2. QUẢN LÝ KHÁCH HÀNG
-    // ==========================================================
     @GetMapping("/users")
     public String userList(Model model) {
         model.addAttribute("users", userRepo.findAll());
         return "admin/customer_list";
     }
 
-    // (Nếu bạn muốn thêm chức năng xóa/sửa User thì thêm vào đây như các bài trước)
-
-    // ==========================================================
     // 3. QUẢN LÝ VOUCHER (MỚI THÊM VÀO ĐÂY)
-    // ==========================================================
     @GetMapping("/vouchers")
     public String voucherList(Model model) {
         model.addAttribute("vouchers", voucherRepo.findAll());
@@ -103,9 +95,7 @@ public class AdminController {
         return "redirect:/admin/vouchers";
     }
 
-    // ==========================================================
     // 4. THỐNG KÊ (STATS)
-    // ==========================================================
     @GetMapping("/stats")
     public String stats(Model model) {
         model.addAttribute("totalProducts", productRepo.count());

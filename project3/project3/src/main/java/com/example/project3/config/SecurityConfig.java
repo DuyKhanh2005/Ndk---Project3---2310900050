@@ -35,10 +35,9 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
 
                         // 2. CÔNG KHAI: Chỉ cho phép Trang chủ, Login, Register, Ảnh, CSS
-                        // (LƯU Ý: Đã xóa "/product/**" và "/cart/**" khỏi đây)
                         .requestMatchers("/", "/login", "/register", "/logout", "/css/**", "/images/**", "/js/**").permitAll()
 
-                        // 3. CÁC TRANG CÒN LẠI (Xem chi tiết, Giỏ hàng...): Phải đăng nhập mới được vào
+                        // 3. CÁC TRANG CÒN LẠI (Xem chi tiết, Giỏ hàng)
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

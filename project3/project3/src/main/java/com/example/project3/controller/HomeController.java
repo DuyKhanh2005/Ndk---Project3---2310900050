@@ -31,10 +31,12 @@ public class HomeController {
             products = productRepo.findByNameContainingIgnoreCase(keyword);
             model.addAttribute("keyword", keyword);
         } else if (category != null && !category.isEmpty()) {
+
             // 2. Nếu có danh mục -> Lọc theo danh mục (Cái bạn đang thiếu)
             products = productRepo.findByCategoryIgnoreCase(category);
             model.addAttribute("category", category);
         } else {
+
             // 3. Mặc định -> Lấy tất cả
             products = productRepo.findAll();
         }
