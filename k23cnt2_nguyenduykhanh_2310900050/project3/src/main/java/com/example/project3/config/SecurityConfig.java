@@ -29,24 +29,24 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // Tắt CSRF để test dễ dàng hơn
                 .authorizeHttpRequests((requests) -> requests
-                        // 1. ADMIN: Chỉ Admin mới vào được
+                        // 1. ADMIN: Yêu cầu quyền ADMIN
                         .requestMatchers("/admin/**").hasRole("ADMIN")
 
-                        // 2. CÔNG KHAI: Chỉ cho phép Trang chủ, Login, Register, Ảnh, CSS
-                        .requestMatchers("/", "/login", "/register", "/logout", "/css/**", "/images/**", "/js/**").permitAll()
+                        // 2. CÔNG KHAI (Public): Ai cũng vào được
+                        .requestMatchers("/", "/product/**", "/login", "/register", "/logout", "/css/**", "/images/**", "/js/**").permitAll()
 
-                        // 3. CÁC TRANG CÒN LẠI (Xem chi tiết, Giỏ hàng)
+                        // 3. CÁC TRANG CÒN LẠI (Giỏ hàng, Thanh toán, Lịch sử): Bắt buộc đăng nhập
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
-                        .loginPage("/login")
-                        // Logic chuyển hướng sau khi đăng nhập thành công
+                        .loginPage("/login") // Trang login tùy chỉnh
                         .successHandler(new AuthenticationSuccessHandler() {
                             @Override
                             public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
                                 Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+                                // Phân luồng sau khi đăng nhập thành công
                                 if (roles.contains("ROLE_ADMIN")) {
                                     response.sendRedirect("/admin");
                                 } else {

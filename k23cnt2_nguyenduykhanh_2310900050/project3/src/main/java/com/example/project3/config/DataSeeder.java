@@ -12,6 +12,7 @@ public class DataSeeder {
     @Bean
     CommandLineRunner initDatabase(ProductRepository repo) {
         return args -> {
+            // Chỉ tạo dữ liệu nếu bảng đang trống
             if (repo.count() == 0) {
                 List<Product> list = List.of(
 
@@ -40,17 +41,38 @@ public class DataSeeder {
                                 "/images/ipad.png", false,
                                 "Trải nghiệm iPad tối thượng với chip M2. Màn hình Mini-LED XDR rực rỡ. Hỗ trợ Apple Pencil 2 lướt chạm cực nhạy."),
 
-                        // 6. Phụ kiện
+                        // 6. Phụ kiện - Tai nghe
                         create("Tai nghe Sony WH-1000XM5", 8990000.0, 6990000.0, "Phụ kiện",
                                 "/images/tainghe.png", false,
-                                "Vua chống ồn chủ động. Thiết kế mới nhẹ hơn, ôm tai hơn. Chất âm Hi-Res Audio Wireless đỉnh cao. Pin trâu 30 giờ.")
+                                "Vua chống ồn chủ động. Thiết kế mới nhẹ hơn, ôm tai hơn. Chất âm Hi-Res Audio Wireless đỉnh cao. Pin trâu 30 giờ."),
+
+                        // --- 4 SẢN PHẨM MỚI THÊM ---
+
+                        // 7. Phụ kiện - Bàn phím
+                        create("Bàn phím cơ Keychron K8 Pro", 3200000.0, 2890000.0, "Phụ kiện",
+                                "/images/keyboard.png", true,
+                                "Bàn phím cơ không dây custom cao cấp. Hỗ trợ QMK/VIA, switch Gateron G Pro mượt mà. Khung nhôm chắc chắn, kết nối đa thiết bị."),
+
+                        // 8. Phụ kiện - Chuột
+                        create("Chuột Logitech MX Master 3S", 2490000.0, 1990000.0, "Phụ kiện",
+                                "/images/mouse.png", false,
+                                "Chuột văn phòng tốt nhất thế giới. Cảm biến 8000 DPI, cuộn từ trường MagSpeed siêu nhanh. Click chuột yên tĩnh giảm 90% tiếng ồn."),
+
+                        // 9. Đồng hồ thông minh
+                        create("Apple Watch Series 9 GPS", 10990000.0, 9590000.0, "Apple",
+                                "/images/watch.png", true,
+                                "Chip S9 SiP mạnh mẽ, màn hình sáng gấp đôi. Tính năng chạm hai lần (Double Tap) độc đáo. Theo dõi sức khỏe tim mạch chuyên sâu."),
+
+                        // 10. Loa Bluetooth
+                        create("Loa JBL Charge 5", 3990000.0, 3290000.0, "Phụ kiện",
+                                "/images/speaker.png", false,
+                                "Âm thanh JBL Original Pro Sound mạnh mẽ. Chống nước bụi chuẩn IP67. Pin 20 giờ chơi nhạc liên tục, tích hợp sạc dự phòng.")
                 );
                 repo.saveAll(list);
             }
         };
     }
 
-    // Hàm create đã được thêm tham số 'description'
     private Product create(String name, Double price, Double salePrice, String cate, String img, Boolean hot, String description) {
         Product p = new Product();
         p.setName(name);
@@ -59,7 +81,7 @@ public class DataSeeder {
         p.setCategory(cate);
         p.setImage(img);
         p.setHot(hot);
-        p.setDescription(description); // Lưu mô tả vào
+        p.setDescription(description);
         return p;
     }
 }
